@@ -156,12 +156,12 @@ export default class ModalSelector extends React.Component {
             newState.modalVisible = this.props.visible;
             doUpdate = true;
         }
-        if (prevProps.selectedKey !== this.props.selectedKey || prevProps.data !== this.props.data) {
-            let selectedItem = this.validateSelectedKey(this.props.selectedKey);
-            newState.selected = selectedItem.label;
-            newState.changedItem = selectedItem.key;
-            doUpdate = true;
-        }
+
+        let selectedItem = this.validateSelectedKey(this.props.selectedKey);
+        newState.selected = selectedItem.label;
+        newState.changedItem = selectedItem.key;
+        doUpdate = true;
+
         if (doUpdate) {
             this.setState(newState);
         }
