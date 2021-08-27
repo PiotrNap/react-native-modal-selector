@@ -145,27 +145,27 @@ export default class ModalSelector extends React.Component {
         };
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        let newState = {};
-        let doUpdate = false;
-        if (prevProps.initValue !== this.props.initValue) {
-            newState.selected = this.props.initValue;
-            doUpdate = true;
-        }
-        if (prevProps.visible !== this.props.visible) {
-            newState.modalVisible = this.props.visible;
-            doUpdate = true;
-        }
+    // componentDidUpdate(prevProps, prevState) {
+    //     let newState = {};
+    //     let doUpdate = false;
+    //     if (prevProps.initValue !== this.props.initValue) {
+    //         newState.selected = this.props.initValue;
+    //         doUpdate = true;
+    //     }
+    //     if (prevProps.visible !== this.props.visible) {
+    //         newState.modalVisible = this.props.visible;
+    //         doUpdate = true;
+    //     }
 
-        let selectedItem = this.validateSelectedKey(this.props.selectedKey);
-        newState.selected = selectedItem.label;
-        newState.changedItem = selectedItem.key;
-        doUpdate = true;
+    //     let selectedItem = this.validateSelectedKey(this.props.selectedKey);
+    //     newState.selected = selectedItem.label;
+    //     newState.changedItem = selectedItem.key;
+    //     doUpdate = true;
 
-        if (doUpdate) {
-            this.setState(newState);
-        }
-    }
+    //     if (doUpdate) {
+    //         this.setState(newState);
+    //     }
+    // }
 
     validateSelectedKey = (key) => {
         let selectedItem = this.props.data.filter((item) => this.props.keyExtractor(item) === key);
