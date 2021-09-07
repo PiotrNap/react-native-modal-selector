@@ -9,7 +9,7 @@ import {
     Text,
     FlatList,
     ScrollView,
-    TouchableOpacity,
+    Pressable,
     TouchableWithoutFeedback,
 } from 'react-native';
 
@@ -128,7 +128,7 @@ const defaultProps = {
     customSelector:                 undefined,
     selectedKey:                    '',
     enableShortPress:               true,
-    enableLongPress:                false,
+    enableLongPress:                true,
     optionsTestIDPrefix:            'default',
 };
 
@@ -144,28 +144,6 @@ export default class ModalSelector extends React.Component {
             changedItem:   selectedItem.key,
         };
     }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     let newState = {};
-    //     let doUpdate = false;
-    //     if (prevProps.initValue !== this.props.initValue) {
-    //         newState.selected = this.props.initValue;
-    //         doUpdate = true;
-    //     }
-    //     if (prevProps.visible !== this.props.visible) {
-    //         newState.modalVisible = this.props.visible;
-    //         doUpdate = true;
-    //     }
-
-    //     let selectedItem = this.validateSelectedKey(this.props.selectedKey);
-    //     newState.selected = selectedItem.label;
-    //     newState.changedItem = selectedItem.key;
-    //     doUpdate = true;
-
-    //     if (doUpdate) {
-    //         this.setState(newState);
-    //     }
-    // }
 
     validateSelectedKey = (key) => {
         let selectedItem = this.props.data.filter((item) => this.props.keyExtractor(item) === key);
@@ -236,7 +214,7 @@ export default class ModalSelector extends React.Component {
         );
 
         return (
-            <TouchableOpacity
+            <Pressable
               key={this.props.keyExtractor(option)}
               testID={option.testID || this.props.optionsTestIDPrefix + '-' + optionLabel}
               onPress={() => this.onChange(option)}
@@ -249,7 +227,7 @@ export default class ModalSelector extends React.Component {
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem && {borderBottomWidth: 0}]}>
                   {component}
                 </View>
-            </TouchableOpacity>);
+            </Pressable>);
     }
 
     renderFlatlistOption = ({ item, index, separators }) => {
@@ -333,11 +311,11 @@ export default class ModalSelector extends React.Component {
                         }
                     </View>
                     <View style={[styles.cancelContainer, cancelContainerStyle]}>
-                        <TouchableOpacity onPress={this.close} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
+                        <Pressable onPress={this.close} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
                             <View style={[styles.cancelStyle, cancelStyle]}>
                                 <Text style={[styles.cancelTextStyle,cancelTextStyle]} {...this.props.cancelTextPassThruProps}>{cancelText}</Text>
                             </View>
-                        </TouchableOpacity>
+                        </Pressable>
                     </View>
                 </View>
             </Overlay>
@@ -380,7 +358,7 @@ export default class ModalSelector extends React.Component {
                 {this.props.customSelector ?
                     this.props.customSelector
                     :
-                    <TouchableOpacity
+                    <Pressable
                         hitSlop={this.props.modalOpenerHitSlop}
                         activeOpacity={this.props.touchableActiveOpacity}
                         style={this.props.touchableStyle}
@@ -392,7 +370,7 @@ export default class ModalSelector extends React.Component {
                         <View style={this.props.childrenContainerStyle} pointerEvents="none">
                             {this.renderChildren()}
                         </View>
-                    </TouchableOpacity>
+                    </Pressable>
                 }
             </View>
         );
